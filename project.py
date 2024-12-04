@@ -37,7 +37,7 @@ def processcommand(c):
         try:
             with sr.Microphone() as source:
                 print("Python is listening to your command...")
-                audio = r.listen(source)
+                audio = r.listen(source, timeout = 2, phrase_time_limit=2)
             request=r.recognize_google(audio)
             print(request)
             processcommand(request)
@@ -46,15 +46,13 @@ def processcommand(c):
         except sr.UnknownValueError:
             print("Could you please speak a little louder please")
         
-    
-
 
 while True:
     r = sr.Recognizer()
     try:
         with sr.Microphone() as source:
             print("Python is listening...")
-            audio = r.listen(source)
+            audio = r.listen(source, timeout=2, phrase_time_limit=2)
         word=r.recognize_google(audio)
 
         if("python" in word.lower()):
@@ -62,23 +60,19 @@ while True:
                 with sr.Microphone() as source:
                     speak("What would you like to do sir?")
                     print("Python is listening to your command...")
-                    audio = r.listen(source)
+                    audio = r.listen(source, timeout=2, phrase_time_limit=2)
                 request=r.recognize_google(audio)
         
                 processcommand(request)
             
-
             except sr.UnknownValueError:
                 print("Could you please speak a little louder please")
 
-            
 
     except sr.UnknownValueError:
         print("Could you please speak a little louder please")
     
+
+
     
-
-
-
-
    
